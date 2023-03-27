@@ -1,9 +1,10 @@
 export default function cleanSet(set, startString) {
   const arr = [];
 
-  if (startString) {
+  console.log(set);
+  if (startString && typeof startString === 'string' && (set instanceof Set)) {
     set
-      .forEach((o) => (o.startsWith(startString) ? arr.push(o.slice(startString.length)) : null));
+      .forEach((o) => (typeof o === 'string' && o.startsWith(startString) ? arr.push(o.slice(startString.length)) : null));
   }
   return arr.join('-');
 }
