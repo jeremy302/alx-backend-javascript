@@ -12,15 +12,15 @@ const app = http.createServer((req, res) => {
     res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     let csv;
+    res.write('This is the list of our students');
     try {
       csv = fs.readFileSync(dbPath, { encoding: 'utf8', flag: 'r' });
     } catch (e) {
       res.statusCode = 500;
-      res.end('Cannot load the database');
+      res.end('\nCannot load the database');
       return;
       // throw Error('Cannot load the database');
     }
-    res.write('This is the list of our students');
     const rows = csv.trim().split('\n').slice(1);
     const studentsCount = rows.length;
     const counts = {};
