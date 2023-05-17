@@ -16,7 +16,10 @@ app.get('/students', (req, res) => {
   try {
     csv = fs.readFileSync(dbPath, { encoding: 'utf8', flag: 'r' });
   } catch (e) {
-    throw Error('Cannot load the database');
+    res.status(500);
+    res.end('\nCannot load the database');
+    return;
+    // throw Error('Cannot load the database');
   }
   const rows = csv.trim().split('\n').slice(1);
   const studentsCount = rows.length;
