@@ -10,7 +10,9 @@ describe('sendPaymentRequestToApi', function(){
     
     it('sendPaymentRequestToApi() calls Utils.calculateNumber()', function(){
         sandbox.spy(console);
-        stub = sandbox.stub(Utils, "calculateNumber");
+        const stub = sinon.stub(Utils, 'calculateNumber');
+
+        // stub = sandbox.stub(Utils, "calculateNumber");
         stub.returns(10);
 
         expect(stub.callCount).to.be.equal(0);
