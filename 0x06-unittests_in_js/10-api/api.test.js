@@ -4,7 +4,7 @@ const request = require('request');
 
 
 describe('express server', function(){
-    const url = 'https://localhost:7865';
+    const url = 'http://localhost:7865';
 
     it('GET /', function(done){
         
@@ -26,7 +26,7 @@ describe('express server', function(){
 
     it('GET /card/<non-number>', function(done){
         request.get(`${url}/cart/47ab`,(err, res, body)=>{
-            expect(res.statusCode >= 400 && res.statusCode < 400).to.equal(true);
+            expect(res.statusCode >= 400 && res.statusCode < 500).to.equal(true);
             done();
         });
     });
@@ -41,12 +41,21 @@ describe('express server', function(){
     });
 
     it('GET /available_payments', function (done) {
-        request.get(`${url}/available_payments`, (err, res, body) => {
-            const obj = JSON.parse(body);
-            expect(res.statusCode).to.be.equal(200);
-            expect(obj)
-                .to.deep.equal({payment_methods: {credit_cards: true, paypal: false}});
-            done();
+        request.get(
+            `${url}/available_payments`,
+            {json: {userName: 'Pinkbrook'}},
+            (err, res, body) => {
+                const obj = JSON.parse(body);
+                expect(res.statusCode).to.equal(200);
+                expect(obj)
+                    .to.deep.equal(
+                        {
+                            payment_methods:
+                            {
+                                credit_cards: true,
+                                paypal: false
+                            }});
+                done();
         });
     });
 });
