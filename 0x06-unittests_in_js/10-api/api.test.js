@@ -45,7 +45,7 @@ describe('express server', function(){
             `${url}/available_payments`,
             {json: {userName: 'Pinkbrook'}},
             (err, res, body) => {
-                const obj = JSON.parse(body);
+                const obj = body;
                 expect(res.statusCode).to.equal(200);
                 expect(obj)
                     .to.deep.equal(
