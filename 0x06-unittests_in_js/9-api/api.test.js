@@ -25,7 +25,8 @@ describe('express server', function(){
 
     it('GET /card/<letter>', function(done){
         request.get(`${url}/cart/47ab`,(err, res, body)=>{
-            expect(res.statusCode >= 400 && res.statusCode < 400).to.equal(true);
+            console.log(res, res.statusCode);
+            expect(res.statusCode >= 400 && res.statusCode < 500).to.equal(true);
             done();
         });
     });
